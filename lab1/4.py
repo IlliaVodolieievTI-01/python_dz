@@ -4,9 +4,9 @@ W = int(input())
 n = list(map(int, input().split()))
 
 maxSuma = 0
-l = len(n)
+length = len(n)
 
-for i in permutations(n, l):
+for i in permutations(n, length):
     suma = 0
     for j in range(l):
         if W >= suma + i[j]:
