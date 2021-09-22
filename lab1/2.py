@@ -8,16 +8,16 @@ operations = {
     "truediv": operator.truediv
 }
 
-def calc(operation, a, b): 
-    return operations[operation](a, b)
+def calc(operation, arg1, arg2): 
+    return operations[operation](arg1, arg2)
 
 operation = argv[1]
-a = float(argv[2])
-b = float(argv[3])
+arg1 = float(argv[2])
+arg2 = float(argv[3])
 
 try: 
     operations[operation]
 except KeyError as e:
     raise Warning('Not-allowed operation: {}'.format(e.args[0]))
 
-print("%.2f" % calc(operation, a, b))
+print("%.2f" % calc(operation, arg1, arg2))
