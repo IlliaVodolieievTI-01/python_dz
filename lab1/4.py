@@ -1,17 +1,20 @@
-from itertools import permutations
+values = [60, 100, 120]
+wt = [10, 20, 30]
+W = 50
+length = len(values)
 
-W = int(input())
-n = list(map(int, input().split()))
 
-maxSuma = 0
-length = len(n)
+def knapSack(W, wt, val, length):
+    K = [[0 for x in range(W + 1)] for x in range(length + 1)]
+    for i in range(length + 1):
+        for w in range(W + 1):
+            if i == 0 or w == 0:
+                K[i][w] = 0
+            elif wt[i-1] <= w:
+                K[i][w] = max(values[i-1] + K[i-1][w-wt[i-1]],  K[i-1][w])
+            else:
+                K[i][w] = K[i-1][w]
+  
+    return K[length][W]
 
-for i in permutations(n, length):
-    suma = 0
-    for j in range(l):
-        if W >= suma + i[j]:
-            suma += i[j]
-    if maxSuma < suma:
-        maxSuma = suma
-
-print(maxSuma)
+print(knapSack(W, wt, values, length))
