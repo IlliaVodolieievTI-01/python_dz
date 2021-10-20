@@ -1,6 +1,6 @@
-#
-#    
-#  
+#	Client         Product
+#         \       /
+#  		    Order
 
 
 class Client:
@@ -21,7 +21,7 @@ class Product:
 		self.tax = tax
 
 	def  productdata(self):
-		return f" Product {self.name} {self.price} {self.weight} {self.tax}"
+		return f" Product {self.productname} {self.price} {self.weight} {self.tax}"
 
 class Order(Client, Product):
 	def __init__(self, name, surname, patronymic, telephone, productname, price, weight, tax):
@@ -31,7 +31,8 @@ class Order(Client, Product):
 	def fullprice(self):
 		return self.price * self.tax
 
-firstorder = Order('Ivan', 'Pervashin', 'Olecsiyovich', '38097456283', 'water', 300, 30, 2)
+firstorder = Order('Ivan', 'Pervashin', 'Olecsiyovich', 38097456283, 'water', 300, 30, 2)
 print(firstorder.clientdata())
 print(firstorder.productdata())
+print("Total price: ")
 print(firstorder.fullprice())
