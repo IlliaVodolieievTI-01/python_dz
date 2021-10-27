@@ -1,19 +1,39 @@
+MAXLEN = 20
+MINLEN = 0
 class Rectangle:
 	def __init__(self, firstside, secondside):
-		if not isinstance(firstside, int) and  not isinstance(firstside, float) or not isinstance(secondside, int) and not isinstance(secondside, float):
+		self.__firstside = firstside
+		self.__secondside = secondside
+
+	def get_firstside(self):
+		return self.__firstside
+
+	def get_secondside(self):
+		return self.__secondside
+
+	def set_firstside(self):
+		if not isinstance(firstside, int) and  not isinstance(firstside, float):
 			raise TypeError("Sides must be integer or float!")
-		elif firstside<=0 or firstside>20 or secondside<=0 or secondside>20:
+		elif firstside<=MINLEN or firstside>MAXLEN:
 			raise ValueError("Bad value...")
 		else:
-			self.firstside = firstside
-			self.secondside = secondside
+			self.__firstside = firstside
+
+
+	def set_secondside(self):
+		if not isinstance(secondside, int) and  not isinstance(secondside, float):
+			raise TypeError("Sides must be integer or float!")
+		elif secondside<=MINLEN or secondside>MAXLEN:
+			raise ValueError("Bad value...")
+		else:
+			self.__secondside = secondside
 
 	def perimeter(self):
-		return 2*self.firstside+2*self.secondside
+		return 2*self.__firstside+2*self.__secondside
 
 
 	def area(self):
-		return self.firstside*self.secondside
+		return self.__firstside*self.__secondside
 
 def main():
 	firstrectangle = Rectangle(1, 3)

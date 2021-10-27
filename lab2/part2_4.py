@@ -1,27 +1,46 @@
 class Tree:
     def __init__(self, key, price):
-        self.key = key
-        self.price = price
+        self.__key = key
+        self.__price = price
         self.left = None
         self.right = None
 
-    def add(self, key, price):
-        if not isinstance(key, int):
-            raise TypeError("Key must be integer!")
-        else:
-            if self.key:
-                if self.left is None:
-                    self.left = Tree(key, price)
-                else:
-                    self.left.add(key, price)
+    @property
+    def key(self):
+        return self.__key
 
-                    if self.right is None:
-                        self.right = Tree(key, price)
-                    else:
-                        self.right.add(key, price)
+    @property
+    def price(self):
+        return self.__price
+
+    @key.setter
+    def key(self, elem):
+        if isinstance(elem, int):
+            self.__key = elem
+        else:
+            raise TypeError("Key must be integer!")
+
+    @price.setter
+    def price(self, elem):
+        if isinstance(elem, (int, float)):
+            self.__price = elem
+        else:
+            raise TypeError("Price must be integer or float!")
+
+    def add(self, key, price):
+        if self.key:
+            if self.left is None:
+                self.left = Tree(key, price)
             else:
-                self.key = key
-            return (self.key)
+                self.left.add(key, price)
+
+                if self.right is None:
+                    self.right = Tree(key, price)
+                else:
+                    self.right.add(key, price)
+        else:
+            self.key = key
+        return self.key
 
     def find(self, key, value):
         if not isinstance(value, int):
@@ -29,17 +48,14 @@ class Tree:
         else:
             if key < self.key:
                 if self.left is None:
-                    return str(key)+" Not Found"
+                    return None
                 return self.left.find(key, value)
             elif key > self.key:
                 if self.right is None:
-                    return str(key)+" Not Found"
+                    return None
                 return self.right.find(key, value)
             else:
                 return self.price * value
-    def back(self):
-        self.left = None
-        self.right = None
 
 def main():
     firsttree = Tree(12, 10)
@@ -51,7 +67,7 @@ def main():
     firsttree.add(3, 21)
     print(firsttree.find(3, 10))
     print(firsttree.find(7, 2))
+    print(firsttree.find(34, 2))
 
 
-if __name__ == '__main__':
-    main()
+main()
