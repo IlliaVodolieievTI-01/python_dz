@@ -1,6 +1,14 @@
 import uuid
 import json
 
+id_length = 36
+earlyday = 60
+earlycoef = 0.6
+studentcoef = 0.5
+lateday = 10
+latecoef = 1.1
+roundcoef = 2
+
 with open('base_data.json') as f:
 	data = json.load(f)
 default_price = data['default_price']
@@ -19,7 +27,7 @@ class Ticket:
 		self.data_id = {}
 
 	def create_ticket(self, id):
-		if not len(str(id)) == 36:
+		if not len(str(id)) == id_length:
 			raise TypeError("Id must be have 36 symbols!")
 		self.id = id
 		self.data_id[self.id] = [str(self.type_of_ticket)]
@@ -53,25 +61,25 @@ class Defaultticket(Ticket):
 class Earlyticket(Ticket):
 	def __init__(self):
 		super().__init__(default_price, days_before)
-		if days_before < 60:
+		if days_before < earlyday:
 			raise ValueError("Unreal create Earlyticket!")
-		self.price = round(default_price*0.6, 2)
+		self.price = round(default_price*earlycoef, roundcoef)
 		self.type_of_ticket = "Early"
 		self.id = uuid.uuid4()
 
 class Studentticket(Ticket):
 	def __init__(self):
 		super().__init__(default_price, days_before)
-		self.price = round(default_price*0.5, 2)
+		self.price = round(default_price*studentcoef, roundcoef)
 		self.type_of_ticket = "Student"
 		self.id = uuid.uuid4()
 
 class Lateticket(Ticket):
 	def __init__(self):
 		super().__init__(default_price, days_before)
-		if days_before >=10:
+		if days_before >= lateday:
 			raise ValueError("Unreal create Lateticket!")
-		self.price = round(default_price*1.1, 2)
+		self.price = round(default_price*latecoef, roundcoef)
 		self.type_of_ticket = "Late"
 		self.id = uuid.uuid4()
 
