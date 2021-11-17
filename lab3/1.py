@@ -26,8 +26,7 @@ class Ticket:
         self.days = days
         self.type_of_ticket = ""
         self.data_id = {}
-        self.data_id['event'] = {}
-        self.data_id['event']['bought_tickets'] = {}
+        self.data_id['ticket'] = {}
         with open('data.json', 'w') as f:
             json.dump(self.data_id, f, indent=4)
 
@@ -37,21 +36,21 @@ class Ticket:
         if not len(str(id)) == id_length:
             raise TypeError("Id must be have 36 symbols!")
         self.id = id
-        self.data_id['event']['bought_tickets'][str(self.id)] = {}
-        self.data_id['event']['bought_tickets'][str(self.id)]['type'] = self.type_of_ticket
-        self.data_id['event']['bought_tickets'][str(self.id)]['days'] = self.days
-        self.data_id['event']['bought_tickets'][str(self.id)]['price'] = self.price
+        self.data_id['ticket'][str(self.id)] = {}
+        self.data_id['ticket'][str(self.id)]['type'] = self.type_of_ticket
+        self.data_id['ticket'][str(self.id)]['days'] = self.days
+        self.data_id['ticket'][str(self.id)]['price'] = self.price
         with open('data.json', 'w') as f1:
             json.dump(self.data_id, f1, indent=4)
 
     def get_info(self, value_id):
         with open('data.json') as f2:
             self.data_id = json.load(f2)
-        if value_id not in self.data_id['event']['bought_tickets']:
+        if value_id not in self.data_id['ticket']:
             raise ValueError("Not found this id!")
-        for id in self.data_id['event']['bought_tickets'].keys():
+        for id in self.data_id['ticket'].keys():
             if value_id == id:
-                return f"{value_id} --- {str(self.data_id['event']['bought_tickets'][value_id])}"
+                return f"{value_id} --- {str(self.data_id['ticket'][value_id])}"
 
     def get_price(self):
         return self.price

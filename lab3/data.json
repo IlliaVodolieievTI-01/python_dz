@@ -1,16 +1,14 @@
 {
-    "event": {
-        "bought_tickets": {
-            "as23ds3d-dss5-sd6f-sd22-fgdhsj3i3ns7": {
-                "type": "Student",
-                "days": 5,
-                "price": 175.0
-            },
-            "we23ds3d-dss5-sd6f-sd22-fgdhsj3i3ns7": {
-                "type": "Student",
-                "days": 5,
-                "price": 175.0
-            }
+    "ticket": {
+        "as23ds3d-dss5-sd6f-sd22-fgdhsj3i3ns7": {
+            "type": "Student",
+            "days": 5,
+            "price": 175.0
+        },
+        "we23ds3d-dss5-sd6f-sd22-fgdhsj3i3ns7": {
+            "type": "Student",
+            "days": 5,
+            "price": 175.0
         }
     }
 }
