@@ -1,5 +1,6 @@
 from math import gcd
 
+"""main class Rational"""
 class Rational:
 	def __init__(self, numerator=1, denominator=1):
 		if not isinstance(numerator, (float, int)) or not isinstance(denominator,(float, int)):
@@ -9,32 +10,38 @@ class Rational:
 		self.__numerator = numerator
 		self.__denominator = denominator
 		
+	"""Reducing fractions"""	
 	def reduce_form(self, num, denum):
 		rdc = gcd(num, denum)
 		num = num // rdc
 		denum = denum // rdc
 		return num, denum
 
-
+	"""String output"""
 	def __str__(self):
 		if self.__denominator == 1:
 			return f'{self.__numerator}'
 		return f'{self.__numerator}/{self.__denominator}'
 
+	"""Calculating number"""
 	def calc(self):
 		return self.__numerator / self.__denominator
     
+	"""Return numerator"""
 	def getnum(self):
 		return self.__numerator
 
+	"""Return denumerator"""
 	def getdenum(self):
 		return self.__denominator
 
+	"""Type checking"""
 	def rational_check(self, elem):
 		if not isinstance(elem, (Rational, int)):
 			raise ArithmeticError("Right operand must be Rational tipe!")
 		return None
 
+	"""Operator overloads +, -, *, /"""
 	def __add__(self, other):
 		if not isinstance(other, int):
 			self.__numerator, self.__denominator = self.reduce_form(self.__numerator*other.getdenum() + self.__denominator*other.getnum(), self.__denominator*other.getdenum())
@@ -80,7 +87,7 @@ def main():
 	rat5 = Rational(12, 6)
 	rat6 = Rational(12, 6)
 	rat7 = Rational(12, 6)
-	i1, i2 = 3, 4
+	i1 = 3
 	thirdrational = firstrational + secondrational
 	thirdrational1 = firstrational1 - secondrational1
 	thirdrational2 = firstrational2 * secondrational2

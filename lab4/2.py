@@ -1,5 +1,6 @@
 import math
 
+"""Constants and Dictionaries"""
 MAXMOUNTH = 12
 MINMOUNTH = 0
 MAXDAY = 31
@@ -36,6 +37,7 @@ yr1 = {
 	12 : 31
 }
 
+"""Main class"""
 class Calendar:
 	def __init__(self, d, m, y):
 		if(d > MAXDAY and d < MINDAY):
@@ -45,19 +47,24 @@ class Calendar:
 			ValueError("Wrong value!")
 		self.mounth = m
 		self.year = y
-
+	
+	"""String output"""
 	def __str__(self):
 		return f'{self.day}.{self.mounth}.{self.year}'
 	
+	"""Day output"""
 	def get_day(self):
 		return self.day
 
+	"""Mounth output"""
 	def get_mounth(self):
 		return self.mounth
 	
+	"""Year output"""
 	def get_year(self):
 		return self.year
 
+	"""Operator overloads +=, -=, >, <, >=, <="""
 	def __iadd__(self, other):
 		if self.year % 4 == 0:
 			if self.mounth + other.get_mounth() > MAXMOUNTH:
