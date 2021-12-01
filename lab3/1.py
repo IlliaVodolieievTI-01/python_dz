@@ -1,6 +1,7 @@
 import uuid
 import json
-
+name_firstfile = 'base_data.json'
+name_secondfile = 'data.json'
 id_length = 36
 earlyday = 60
 earlycoef = 0.6
@@ -9,7 +10,7 @@ lateday = 10
 latecoef = 1.1
 roundcoef = 2
 
-with open('base_data.json') as f:
+with open(name_firstfile) as f:
     data = json.load(f)
 default_price = data['default_price']
 days_before = data['days_before']
@@ -27,11 +28,11 @@ class Ticket:
         self.type_of_ticket = ""
         self.data_id = {}
         self.data_id['ticket'] = {}
-        with open('data.json', 'w') as f:
+        with open(name_secondfile, 'w') as f:
             json.dump(self.data_id, f, indent=4)
 
     def create_ticket(self, id):
-        with open('data.json', 'r') as f1:
+        with open(name_secondfile, 'r') as f1:
             self.data_id = json.load(f1)
         if not len(str(id)) == id_length:
             raise TypeError("Id must be have 36 symbols!")
@@ -44,7 +45,7 @@ class Ticket:
             json.dump(self.data_id, f1, indent=4)
 
     def get_info(self, value_id):
-        with open('data.json') as f2:
+        with open(name_secondfile) as f2:
             self.data_id = json.load(f2)
         if value_id not in self.data_id['ticket']:
             raise ValueError("Not found this id!")

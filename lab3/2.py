@@ -1,12 +1,14 @@
 import json
+from datetime import date
 day_now = 4
 min_day = 0
 max_day = 8
-
-with open('pizza.json') as f1:
+name_firstfile = 'pizza.json'
+name_secondfile = 'price.json'
+with open(name_firstfile, 'r') as f1:
 	pizza = json.load(f1)
 
-with open('price.json') as f2:
+with open(name_secondfile, 'r') as f2:
 	price = json.load(f2)
 
 class Pizza:
@@ -33,9 +35,8 @@ class Pizza:
 		return f'-------\n{pizza_name} added to order!\nAdded products:{total_products}\nPrice:{price[self.name_of_pizza]}\nTotal price:{self.total_price}\n-------'
 
 	def pizza_of_day(self):
-		if self.day < min_day and self.day > max_day:
-			raise ValueError("Unreal day!")
-		return pizza[self.day]
+		date_now = date.today().weekday()
+		return pizza[str(date_now)]
 
 	def orderprice(self):
 		return self.total_price
@@ -77,6 +78,7 @@ class Prosciutto(Pizza):
 
 
 firstorder = Margherita()
+print(firstorder.pizza_of_day())
 print(firstorder.order_pizza(['Chesee', 'Meet']))
 print(firstorder.order_other_pizza('Peperoni', ['Chesee']))
 print("Prepare to payment: %.2f$" %firstorder.orderprice())

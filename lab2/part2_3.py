@@ -3,9 +3,15 @@ MAXSTUDENTS = 20
 MINSTUDENTS = 0
 class Student:
     def __init__(self, name, surname, record_book, marks):
+        if not isinstance(name, str):
+            raise TypeError("Type must be string!")
         self.__name = name
+        if not isinstance(surname, str):
+            raise TypeError("Type must be string!")
         self.__surname = surname
         self.__record_book = record_book
+        if not isinstance(marks, list):
+            raise TypeError("Type must be list!")
         self.marks = marks
     
     def __repr__(self):

@@ -52,8 +52,14 @@ class Client:
 class Product:
     def __init__(self, productname, price, weight, tax):
         self.productname = productname
+        if price < 0:
+            ValueError("Must be more 0!")
         self.price = price
+        if weigth < 0:
+            ValueError("Must be more 0!")
         self.weight = weight
+        if tax < 0:
+            ValueError("Must be more 0!")
         self.tax = tax
 
     def  productdata(self):
