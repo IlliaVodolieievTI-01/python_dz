@@ -40,7 +40,7 @@ yr1 = {
 """Main class"""
 class Calendar:
 	def __init__(self, d, m, y):
-		if(d > MAXDAY and d < MINDAY):
+		if MINDAY < d < MAXDAY:
 			ValueError("Wrong value!")
 		self.day = d
 		if(m > MAXMOUNTH and m < MINMOUNTH):
