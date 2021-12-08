@@ -10,8 +10,9 @@ class Rational:
 		self.__numerator = numerator
 		self.__denominator = denominator
 		
-	"""Reducing fractions"""	
-	def reduce_form(self, num, denum):
+	"""Reducing fractions"""
+	@staticmethod	
+	def reduce_form(num, denum):
 		rdc = gcd(num, denum)
 		num = num // rdc
 		denum = denum // rdc
@@ -28,12 +29,25 @@ class Rational:
 		return self.__numerator / self.__denominator
     
 	"""Return numerator"""
-	def getnum(self):
+	@property
+	def numerator(self):
 		return self.__numerator
 
-	"""Return denumerator"""
-	def getdenum(self):
+	@property
+	def denominator(self):
 		return self.__denominator
+
+	@numerator.setter
+	def numerator(self, value):
+		if not isinstance(value, int):
+			raise TypeError("Wrong error!")
+		self.numerator = value
+
+	@denominator.setter
+	def denominator(self, value):
+		if not isinstance(value, int):
+			raise TypeError("Wrong error!")
+		self.denominator = value
 
 	"""Type checking"""
 	def rational_check(self, elem):
@@ -44,35 +58,43 @@ class Rational:
 	"""Operator overloads +, -, *, /"""
 	def __add__(self, other):
 		if not isinstance(other, int):
-			self.__numerator, self.__denominator = self.reduce_form(self.__numerator*other.getdenum() + self.__denominator*other.getnum(), self.__denominator*other.getdenum())
+			self.__numerator, self.__denominator = self.reduce_form(self.__numerator*other.denominator + self.__denominator*other.numerator, self.__denominator*other.denominator)
 			return Rational(self.__numerator, self.__denominator)
-		self.__numerator = self.__numerator / self.__denominator + other
-		self.__denominator = 1
-		return Rational(self.__numerator, self.__denominator)
+		elif isinstance(other, int):
+			self.__numerator = self.__numerator / self.__denominator + other
+			self.__denominator = 1
+			return Rational(self.__numerator, self.__denominator)
+		raise TypeError("Wrong value!")
 	
 	def __sub__(self, other):
 		if not isinstance(other, int):
-			self.__numerator, self.__denominator = self.reduce_form(self.__numerator*other.getdenum() - self.__denominator*other.getnum(), self.__denominator*other.getdenum())
+			self.__numerator, self.__denominator = self.reduce_form(self.__numerator*other.denominator - self.__denominator*other.numerator, self.__denominator*other.denominator)
 			return Rational(self.__numerator, self.__denominator)
-		self.__numerator = self.__numerator / self.__denominator + other
-		self.__denominator = 1
-		return Rational(self.__numerator, self.__denominator)
+		elif isinstance(other, int):
+			self.__numerator = self.__numerator / self.__denominator + other
+			self.__denominator = 1
+			return Rational(self.__numerator, self.__denominator)
+		raise TypeError("Wrong value!")
 
 	def __mul__(self, other):
 		if not isinstance(other, int):
-			self.__numerator, self.__denominator = self.reduce_form(self.__numerator*other.getnum(), self.__denominator*other.getdenum())
+			self.__numerator, self.__denominator = self.reduce_form(self.__numerator*other.numerator, self.__denominator*other.denominator)
 			return Rational(self.__numerator, self.__denominator)
-		self.__numerator = self.__numerator / self.__denominator * other
-		self.__denominator = 1
-		return Rational(self.__numerator, self.__denominator)
+		elif isinstance(other, int):
+			self.__numerator = self.__numerator / self.__denominator * other
+			self.__denominator = 1
+			return Rational(self.__numerator, self.__denominator)
+		raise TypeError("Wrong value!")
 
 	def __truediv__(self, other):
 		if not isinstance(other, int):
-			self.__numerator, self.__denominator = self.reduce_form(self.__numerator*other.getdenum(), self.__denominator*other.getnum())
+			self.__numerator, self.__denominator = self.reduce_form(self.__numerator*other.denominator, self.__denominator*other.numerator)
 			return Rational(self.__numerator, self.__denominator)
-		self.__numerator = self.__numerator / self.__denominator / other
-		self.__denominator = 1
-		return Rational(self.__numerator, self.__denominator)
+		elif isinstance(other, int):
+			self.__numerator = self.__numerator / self.__denominator / other
+			self.__denominator = 1
+			return Rational(self.__numerator, self.__denominator)
+		raise TypeError("Wrong value!")
 
 def main():
 	firstrational = Rational(9, 12)
