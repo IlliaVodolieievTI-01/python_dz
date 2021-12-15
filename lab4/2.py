@@ -83,8 +83,8 @@ class Calendar:
 				self.year += ITER
 			else:
 				self.mounth += other.mounth
-			if self.day + other.day > yr1[self.mounth]:
-				self.day = self.day + other.day - yr1[self.mounth]
+			if self.day + other.day > yr[self.mounth]:
+				self.day = self.day + other.day - yr[self.mounth]
 				self.mounth += ITER
 			else:
 				self.day += other.day
@@ -107,8 +107,8 @@ class Calendar:
 	def __isub__(self, other):
 		if self.year % 4 == 0 and self.year % 100 != 0 or self.year % 400 == 0:
 			yr["2"] += 1
-			if self.day - other.day < yr1[self.mounth - other.mounth]:
-				self.day = self.day - other.day + yr1[self.mounth - other.mounth]
+			if self.day - other.day < yr[self.mounth - other.mounth]:
+				self.day = self.day - other.day + yr[self.mounth - other.mounth]
 				self.mounth -= ITER
 			else:
 				self.day -= other.day
